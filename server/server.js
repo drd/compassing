@@ -1,13 +1,14 @@
-require('node-jsx').install({extension: '.jsx'});
+require('node-jsx').install({extension: '.jsx', harmony: true});
 
+var React = require('react');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
 var React = require('react');
 
-var Layout = React.createFactory(require('./layout.jsx'));
-var App = React.createFactory(require('../app/app.jsx'));
+var Layout = React.createFactory(require('./layout'));
+var App = React.createFactory(require('../app/app'));
 
 
 start();
@@ -26,6 +27,7 @@ function start() {
 
 
 function handleRequest(req, res, next) {
-    var markup = React.renderToStaticMarkup(Layout(null, App()));
+    var app = React.renderToString(App());
+    var markup = React.renderToStaticMarkup(Layout(null, app));
     res.end(markup);
 }
