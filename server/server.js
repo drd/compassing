@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var React = require('react');
+var api = require('./api');
 
 var Layout = React.createFactory(require('./layout'));
 var App = React.createFactory(require('../app/app'));
@@ -18,6 +18,7 @@ function start() {
     var server = express();
     server.use(bodyParser.json());
     server.use(cors());
+    server.use('/api/v1', api);
     server.use(handleRequest);
     server.listen(process.env['LISTEN_PORT'] || 3001, function(err, result) {
         if (err) return console.log(err);

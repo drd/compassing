@@ -1,0 +1,14 @@
+-- schema and roles
+
+create schema compassing;
+create database compassing;
+create role compassing with login password 'compassing';
+grant all on schema compassing to compassing;
+grant all on all tables in schema compassing to compassing;
+
+-- tables
+
+create table posts (
+       id serial primary key,
+       data jsonb
+) with schema = compassing;

@@ -12,10 +12,13 @@ module.exports = {
         path: __dirname + '/dist',
         publicPath: 'http://localhost:3000/'
     },
-//    devtool: 'eval-source-map',
+    devtool: 'eval-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
+    server: {
+	port: 3000
+    },
     resolve: {
         // Look directly in app dir for modules
         root: __dirname + '/app',
