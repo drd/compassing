@@ -1,5 +1,9 @@
 var React = require('react');
-var App = React.createFactory(require('App'));
+var App = require('app');
 require('css/site.css');
 
-React.render(App(), document.getElementById('all'));
+var app = React.createElement(App, {
+    posts: window.__posts__
+});
+
+React.render(app, document.getElementById('all'));

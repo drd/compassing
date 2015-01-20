@@ -66,6 +66,11 @@ nav ul {
 
 nav li {
   display: inline;
+  margin-right: .5em;
+}
+
+nav li:last-of-type {
+  margin-right: 0;
 }
 
 @media all and (max-width: 520px) {

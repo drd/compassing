@@ -10,7 +10,7 @@ module.exports = {
     output: {
         filename: 'compassing.js',
         path: __dirname + '/dist',
-        publicPath: 'http://localhost:3000/'
+        publicPath: '/static/'
     },
     devtool: 'eval-source-map',
     plugins: [
@@ -28,7 +28,7 @@ module.exports = {
     module: {
         loaders: [
             // Pass *.jsx files through jsx-loader transform
-            { test: /\.jsx$/, loaders: ['react-hot', 'jsx'] },
+            { test: /\.jsx$/, loaders: ['6to5?source-maps&experimental', 'react-hot', 'jsx'] },
             { test: /\.css$/, loaders: ['style', 'css'] }
         ]
     }

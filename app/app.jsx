@@ -1,11 +1,12 @@
 var React = require('react');
 
-module.exports = React.createClass({
+
+var App = React.createClass({
     render: function() {
         return (
             <div id="content">
                 <section id="title">
-                    <h1> title </h1>
+                    <h1> titleish </h1>
                 </section>
                 <nav>
                     <ul>
@@ -14,9 +15,38 @@ module.exports = React.createClass({
                     </ul>
                 </nav>
                 <section id="content">
-
+                    <Posts posts={this.props.posts}/>
                 </section>
             </div>
         );
     }
 });
+
+
+var Posts = React.createClass({
+    render: function() {
+        return (
+            <div>
+                {this.props.posts.map((post) => <Post {...post}/>)}
+            </div>
+        );
+    }
+});
+
+
+var Post = React.createClass({
+    render: function() {
+        return (
+            <article>
+                <header>
+                    <h1>{this.props.title}</h1>
+                    <p><time>{this.props.datePosted}</time></p>
+                </header>
+                <div dangerouslySetInnerHTML={{__html: this.props.body}}/>
+            </article>
+        );
+    }
+});        
+    
+
+export default App;
