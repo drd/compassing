@@ -1,5 +1,5 @@
 var React = require('react');
-
+import {RouteHandler} from 'react-router';
 
 var App = React.createClass({
     render: function() {
@@ -15,7 +15,7 @@ var App = React.createClass({
                     </ul>
                 </nav>
                 <section id="content">
-                    <Posts posts={this.props.posts}/>
+                    <RouteHandler posts={this.props.posts} />
                 </section>
             </div>
         );
@@ -49,4 +49,4 @@ var Post = React.createClass({
 });        
     
 
-export default App;
+export {App, Posts};

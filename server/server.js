@@ -3,7 +3,6 @@ var to5 = require('6to5');
 
 require('node-jsx').install({
     extension: '.jsx',
-    harmony: true,
     postTransform: function(f, o) {
         return to5.transform(f, {experimental: true}).code;
     }
