@@ -1,21 +1,21 @@
 var React = require('react');
-
+import {RouteHandler} from 'react-router';
 
 var App = React.createClass({
     render: function() {
         return (
             <div id="content">
                 <section id="title">
-                    <h1> titleish </h1>
+                    <h1> compassing </h1>
                 </section>
                 <nav>
                     <ul>
                         <li><a href="/">Updates</a></li>
-                        <li><a href="/photos">Photo</a></li>
+                        <li><a href="/photos">Photos</a></li>
                     </ul>
                 </nav>
                 <section id="content">
-                    <Posts posts={this.props.posts}/>
+                    <RouteHandler posts={this.props.posts} />
                 </section>
             </div>
         );
@@ -49,4 +49,4 @@ var Post = React.createClass({
 });        
     
 
-export default App;
+export {App, Posts};

@@ -12,7 +12,7 @@ var Base = React.createClass({
                 <body>
                     <div id="all"
                          dangerouslySetInnerHTML={{__html: this.props.children}}/>
-                    <script src="http://localhost:3000/compassing.js"></script>
+                    <script src="/js/compassing.js"></script>
                 </body>
             </html>
         );

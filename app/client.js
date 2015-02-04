@@ -1,9 +1,13 @@
 var React = require('react');
-var App = require('app');
+var Router = require('react-router');
+var Routes = require('./routes');
+
 require('css/site.css');
 
-var app = React.createElement(App, {
-    posts: window.__posts__
-});
+start();
 
-React.render(app, document.getElementById('all'));
+function start() {
+    Router.run(Routes, Router.HistoryLocation, (Handler) => {
+        React.render(React.createElement(Handler, {posts: window.__posts__}), document.getElementById('all'));
+    });
+}

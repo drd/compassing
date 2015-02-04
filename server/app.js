@@ -1,8 +1,9 @@
 var React = require('react');
+var Router = require('react-router');
 
 var model = require('./model');
 var Base = require('./base');
-var App = require('../app/app');
+var Routes = require('../app/routes');
 
 
 function globalScriptAssignment(name, value) {
@@ -11,19 +12,19 @@ function globalScriptAssignment(name, value) {
 
 async function handleRequest(req, res, next) {
     let posts = await model.Post.getAll();
-
-    var appMarkup = React.renderToString(
-        React.createElement(App, {posts})
-    );
-
-    var markup = React.renderToStaticMarkup(
-        React.createElement(
-            Base,
-            {posts: globalScriptAssignment('__posts__', posts)},
-            appMarkup
-        )
-    );
-    res.end(markup);
+    Router.run(Routes, req.path, (Handler) => {
+        var appMarkup = React.renderToString(
+            React.createElement(Handler, {posts})
+        );
+        var markup = React.renderToStaticMarkup(
+            React.createElement(
+                Base,
+                {posts: globalScriptAssignment('__posts__', posts)},
+                appMarkup
+            )
+        );
+        res.end(markup);
+    });
 }
 
 
