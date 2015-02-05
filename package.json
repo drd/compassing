@@ -6,7 +6,7 @@
     "cors": "^2.5.2",
     "css-loader": "^0.9.0",
     "express": "^4.10.2",
-    "node-jsx": "^0.12.0",
+    "node-jsx": "drd/node-jsx#7ec0b8e542f32662872e76cbaeac88083b566d0f",
     "pg": "^4.1.1",
     "pg-native": "^1.7.1",
     "react": "^0.12.0",
@@ -15,7 +15,7 @@
     "webpack": "^1.4"
   },
   "devDependencies": {
-    "jsx-loader": "^0.12.1",
+    "jsx-loader": "drd/jsx-loader#e6e082d8820e4eb5b1c105a4ce5435f1a5836819",
     "node-inspector": "^0.8.3",
     "nodemon": "^1.2.1",
     "react-hot-loader": "^0.5.0",
