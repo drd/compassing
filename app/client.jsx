@@ -8,6 +8,8 @@ start();
 
 function start() {
     Router.run(Routes, Router.HistoryLocation, (Handler) => {
-        React.render(React.createElement(Handler, {posts: window.__posts__}), document.getElementById('all'));
+        var Data = { Resolve: () => window.__data__ };
+        var data = Data.Resolve();
+        React.render(<Handler {...data}/>, document.getElementById('all'));
     });
 }

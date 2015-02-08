@@ -5,14 +5,14 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/dev-server',
-        './client.js'
+        './client.jsx'
     ],
     output: {
         filename: 'compassing.js',
         path: __dirname + '/dist',
         publicPath: '/'
     },
-    devtool: 'eval-source-map',
+//    devtool: 'eval-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],

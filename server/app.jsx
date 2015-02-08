@@ -4,20 +4,32 @@ var Router = require('react-router');
 var model = require('./model');
 var Base = require('./base');
 var Routes = require('../app/routes');
+var Data = require('./data');
 
 
 function globalScriptAssignment(name, value) {
     return `window.${name} = ${JSON.stringify(value)}`;
 }
 
-async function handleRequest(req, res, next) {
-    let posts = await model.Post.getAll();
-    Router.run(Routes, req.path, (Handler) => {
-        var appMarkup = React.renderToString(<Handler posts={posts} />);
-        var markup = React.renderToStaticMarkup(
-            <Base posts={globalScriptAssignment('__posts__', posts)}>{appMarkup}</Base>
-        );
-        res.end(markup);
+let empty = () => {};
+
+function handleRequest(req, res, next) {
+    Router.run(Routes, req.path, async (Handler, state) => {
+        try {
+            let deps = state.routes.filter((r) => r.handler.dataDependency).reduce( (deps, r) => {
+                deps[r.handler.displayName] = r.handler.dataDependency();
+                return deps;
+            }, {});
+            let data = await Data.Resolve(deps, req);
+            var appMarkup = React.renderToString(<Handler {...data} />);
+            var markup = React.renderToStaticMarkup(
+                <Base posts={globalScriptAssignment('__data__', data)}>{appMarkup}</Base>
+            );
+            res.end(markup);
+        } catch(e) {
+            console.error(e);
+            res.status(500).end();
+        }
     });
 }
 

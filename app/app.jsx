@@ -24,10 +24,16 @@ var App = React.createClass({
 
 
 var Posts = React.createClass({
+    statics: {
+        dataDependency: () => {
+            return ['Posts', 'all'];
+        }
+    },
+
     render: function() {
         return (
             <div>
-                {this.props.posts.map((post) => <Post {...post}/>)}
+                {this.props.posts.map((post) => <Post key={post.id} {...post}/>)}
             </div>
         );
     }
