@@ -1,6 +1,7 @@
 var React = require('react');
 import {RouteHandler} from 'react-router';
 
+
 var App = React.createClass({
     render: function() {
         return (
@@ -15,7 +16,7 @@ var App = React.createClass({
                     </ul>
                 </nav>
                 <section id="content">
-                    <RouteHandler posts={this.props.posts} />
+                    <RouteHandler posts={this.props.posts}/>
                 </section>
             </div>
         );

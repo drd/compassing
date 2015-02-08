@@ -13,7 +13,7 @@
     "react": "^0.12.0",
     "react-router": "^0.11.6",
     "style-loader": "^0.8.2",
-    "webpack": "^1.4"
+    "webpack": "^1.5"
   },
   "devDependencies": {
     "jsx-loader": "drd/jsx-loader#e6e082d8820e4eb5b1c105a4ce5435f1a5836819",

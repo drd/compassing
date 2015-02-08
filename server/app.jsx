@@ -21,7 +21,7 @@ function handleRequest(req, res, next) {
                 return deps;
             }, {});
             let data = await Data.Resolve(deps, req);
-            var appMarkup = React.renderToString(<Handler {...data} />);
+            var appMarkup = React.renderToString(<Handler {...data}/>);
             var markup = React.renderToStaticMarkup(
                 <Base posts={globalScriptAssignment('__data__', data)}>{appMarkup}</Base>
             );

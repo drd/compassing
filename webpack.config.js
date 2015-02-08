@@ -2,18 +2,25 @@ var webpack = require('webpack');
 
 module.exports = {
     context: __dirname + '/app',
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/dev-server',
-        './client.jsx'
-    ],
+    entry: {
+        vendor: ['webpack-dev-server/client?http://localhost:3000',
+                 'webpack/hot/dev-server',
+                 'react',
+                 'react-router'],
+        app: './client.jsx'
+    },
     output: {
         filename: 'compassing.js',
         path: __dirname + '/dist',
-        publicPath: '/'
+        publicPath: '/js'
     },
-//    devtool: 'eval-source-map',
+    devtool: 'eval',
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js',
+            minChunks: Infinity
+        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     server: {
