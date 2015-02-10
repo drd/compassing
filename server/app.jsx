@@ -1,5 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
+var saferStringify = require('safer-stringify');
 
 var model = require('./model');
 var Base = require('./base');
@@ -8,7 +9,7 @@ var Data = require('./data');
 
 
 function globalScriptAssignment(name, value) {
-    return `window.${name} = ${JSON.stringify(value)}`;
+    return `window.${name} = ${saferStringify(value)}`;
 }
 
 let empty = () => {};
