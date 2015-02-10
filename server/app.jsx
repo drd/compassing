@@ -22,10 +22,11 @@ function handleRequest(req, res, next) {
                 return deps;
             }, {});
             let data = await Data.Resolve(deps, req);
+            // generate the hydrateable application markup
             var appMarkup = React.renderToString(<Handler {...data}/>);
             var markup = React.renderToStaticMarkup(
-                <Base posts={globalScriptAssignment('__data__', data)}>{appMarkup}</Base>
-            );
+                <Base posts={globalScriptAssignment('__data__', data)} markup={appMarkup} />
+            )
             res.end(markup);
         } catch(e) {
             console.error(e);
