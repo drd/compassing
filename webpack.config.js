@@ -34,9 +34,9 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loaders: ['6to5?source-maps&experimental'] },
+            { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?experimental&optional=runtime'] },
             // Pass *.jsx files through jsx-loader transform
-            { test: /\.jsx$/, loaders: ['6to5?source-maps&experimental', 'react-hot', 'jsx'] },
+            { test: /\.jsx$/, loaders: ['babel?experimental&optional=runtime', 'react-hot', 'jsx'] },
             { test: /\.css$/, loaders: ['style', 'css'] }
         ]
     }

@@ -1,10 +1,10 @@
-require('6to5/register')({experimental: true});
-var to5 = require('6to5');
+require('babel/register')({experimental: true});
+var babel = require('babel');
 
 require('node-jsx').install({
     extension: '.jsx',
     postTransform: function(f, o) {
-        return to5.transform(f, {experimental: true}).code;
+        return babel.transform(f, {experimental: true}).code;
     }
 });
 
