@@ -4,9 +4,9 @@ var pgUrl = "postgres://compassing:compassing@localhost/compassing"; // FIXME
 
 // async, public api
 
-async function query(query) {
+async function query(query, params) {
     let {client, done} = await _getClient();
-    return await _runQuery(client, done, query);
+    return await _runQuery(client, done, query, params);
 }
 
 
@@ -24,9 +24,9 @@ function _getClient() {
 }
 
 
-function _runQuery(client, done, query) {
+function _runQuery(client, done, query, params) {
     return new Promise((resolve, reject) => {
-        client.query(query, (err, result) => {
+        client.query(query, params, (err, result) => {
             done();
             if (err) {
                 reject(err);

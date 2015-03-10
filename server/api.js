@@ -2,11 +2,26 @@ var model = require('./model');
 var router = require('express').Router();
 
 
-router.get('/', async function(req, res) {
+router.param('id', (req, res, next) => {
+    req.id = parseInt(req.params.id, 10);
+    next();
+});
+
+router.get('/posts', async function(req, res) {
     try {
-        let posts = await model.Post.getAll();
-        console.log(posts);
+        let posts = await model.Post.all();
         res.json(posts);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e.message);
+    }
+});
+
+
+router.get('/posts/:id', async function(req, res) {
+    try {
+        let post = await model.Post.get(req.params.id);
+        res.json(post);
     } catch(e) {
         console.log(e);
         res.status(500).send(e.message);

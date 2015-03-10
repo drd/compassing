@@ -1,5 +1,5 @@
 var React = require('react');
-import {RouteHandler} from 'react-router';
+import {Link, RouteHandler} from 'react-router';
 
 
 var App = React.createClass({
@@ -16,7 +16,7 @@ var App = React.createClass({
                     </ul>
                 </nav>
                 <section id="content">
-                    <RouteHandler posts={this.props.posts}/>
+                    <RouteHandler {...this.props}/>
                 </section>
             </div>
         );
@@ -26,8 +26,8 @@ var App = React.createClass({
 
 var Posts = React.createClass({
     statics: {
-        dataDependency: () => {
-            return ['Posts', 'all'];
+        dataDependency: async function(params, model) {
+            return { posts: await model.Post.all() };
         }
     },
 
@@ -42,11 +42,17 @@ var Posts = React.createClass({
 
 
 var Post = React.createClass({
+    statics: {
+        dataDependency: async function(params, model) {
+            return await model.Post.get(params.id);
+        }
+    },
+
     render: function() {
         return (
             <article>
                 <header>
-                    <h1>{this.props.title}</h1>
+                    <h1><Link to="ViewPost" params={{id: this.props.id}}>{this.props.title}</Link></h1>
                     <p><time>{this.props.datePosted}</time></p>
                 </header>
                 <div dangerouslySetInnerHTML={{__html: this.props.body}}/>
@@ -56,4 +62,4 @@ var Post = React.createClass({
 });        
     
 
-export {App, Posts};
+export {App, Posts, Post};

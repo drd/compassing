@@ -1,12 +1,15 @@
 var model = require('./model');
 
 
-async function Resolve(dep, req) {
+function Resolve(deps) {
     try {
-        let posts = await model.Post.getAll();
-        return {posts};
+        return deps.reduce(async function(data, dep) {
+            Object.assign(data, await dep(model));
+            return data;
+        }, {});
     } catch (e) {
         console.error(e);
+        console.error(e.stack);
     }
 }
 
