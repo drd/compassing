@@ -28,4 +28,26 @@ router.get('/posts/:id', async function(req, res) {
     }
 });
 
+
+router.post('/posts', async function(req, res) {
+    try {
+        let post = await model.Post.create(req.params.id, req.body);
+        res.json(post);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e.message);
+    }
+})
+
+router.put('/posts/:id', async function(req, res) {
+    try {
+        let post = await model.Post.update(req.params.id, req.body);
+        res.json(post);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e.message);
+    }
+});
+
+
 export default router;

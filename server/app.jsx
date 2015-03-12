@@ -17,6 +17,7 @@ function globalScriptAssignment(name, value) {
 let empty = () => {};
 
 function handleRequest(req, res, next) {
+    res.header("Content-Type", "text/html; charset=utf-8");
     Router.run(Routes, req.path, async (Handler, state) => {
         try {
             let data = await Data.Resolve(Dependencies(state));

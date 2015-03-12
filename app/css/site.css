@@ -77,3 +77,20 @@ nav li:last-of-type {
   h1 { font-size: 3em; }
   article h1 { font-size: 2em; }
 }
+
+.field {
+    width: 100%;
+}
+
+.field + div.field {
+    padding-top: 1rem;
+}
+
+.field input,
+.field textarea {
+    display: inline-block;
+    width: 100%;
+}
+
+input { padding: .5rem; border: thin solid #eee; }
+textarea { padding: .5rem; border: thin solid #eee; min-height: 20rem; }

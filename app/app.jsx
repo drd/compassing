@@ -1,6 +1,7 @@
 var React = require('react');
 import {Link, RouteHandler} from 'react-router';
 
+let model = require('./model');
 
 var App = React.createClass({
     render: function() {
@@ -11,8 +12,8 @@ var App = React.createClass({
                 </section>
                 <nav>
                     <ul>
-                        <li><a href="/">Updates</a></li>
-                        <li><a href="/photos">Photos</a></li>
+                        <li><Link to="App">Updates</Link></li>
+                        <li><Link to="NewPost">Post</Link></li>
                     </ul>
                 </nav>
                 <section id="content">
@@ -54,12 +55,52 @@ var Post = React.createClass({
                 <header>
                     <h1><Link to="ViewPost" params={{id: this.props.id}}>{this.props.title}</Link></h1>
                     <p><time>{this.props.datePosted}</time></p>
+                    <p><Link to="EditPost" params={{id: this.props.id}}>Edit</Link></p>
                 </header>
                 <div dangerouslySetInnerHTML={{__html: this.props.body}}/>
             </article>
         );
     }
 });        
-    
 
-export {App, Posts, Post};
+
+var Edit = React.createClass({
+    statics: {
+        dataDependency: async function(params, model) {
+            return params.id ? await model.Post.get(params.id) : null;
+        }
+    },
+
+    getInitialState() {
+        return Object.assign({}, this.props);
+    },
+    
+    changeHandlerFor(field) {
+        return e => this.setState({[field]: e.target.value});
+    },
+
+    submitPost() {
+        model.Post.save(this.props.id, this.state);
+    },
+
+    render() {
+        return (
+            <div>
+                <h2>Edit &ldquo;{this.state.title}&rdquo;</h2>
+                <div className="fields">
+                    <div className="field">
+                        <input value={this.state.title} onChange={this.changeHandlerFor('title')} />
+                    </div>
+                    <div className="field">
+                        <textarea value={this.state.body} onChange={this.changeHandlerFor('body')} />
+                    </div>
+                    <button onClick={this.submitPost}>Save</button>
+                </div>
+                <p>{this.props.id && <Link to="ViewPost" params={{id: this.props.id}}>&laquo; Back</Link>}</p>
+            </div>
+        );
+    }
+});
+
+
+export {App, Posts, Post, Edit};
