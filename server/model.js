@@ -21,7 +21,7 @@ class Post {
     }
 
     static async update(id, data) {
-        let result = await query('update compassing.posts set data = $1 returning *', [data]);
+        let result = await query('update compassing.posts set data = $2 where id = $1 returning *', [id, data]);
         return postMapper(result);
     }
 }
